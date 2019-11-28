@@ -1,0 +1,63 @@
+
+
+public class Solution {
+    
+    public static LinkedListNode<Integer>  Reverse(LinkedListNode<Integer> head){
+        
+        LinkedListNode<Integer> prev=null;
+         LinkedListNode<Integer> current=head;
+         LinkedListNode<Integer> next=null;
+        
+        while(current!=null){
+            
+            next=current.next;
+            current.next=prev;
+            
+            prev=current;
+            current=next;
+        }
+        
+        
+        head=prev ;
+       
+        
+        return head;
+    }
+    
+	public static boolean isPalindrome_2(LinkedListNode<Integer> head) {
+ 
+          if(head==null ||head.next==null ){
+            return true;
+        }
+        
+   
+        LinkedListNode<Integer> fast=head;
+          LinkedListNode<Integer> root=new LinkedListNode<>(head.data);
+     LinkedListNode<Integer> t=root;
+        
+        head=head.next;
+        while(head!=null){
+            LinkedListNode<Integer> newNode=new LinkedListNode<>(head.data);
+            root.next=newNode;
+            root=root.next;
+            head=head.next;
+        }
+      
+      
+       LinkedListNode<Integer> slow=Reverse(root);
+        
+        while(fast!=null && slow!=null){
+            
+            if(fast.data.equals(slow.data)){
+               // return true;
+                  fast=fast.next;
+                slow=slow.next;
+            }
+            else{
+              return false;
+            }
+            
+        }
+        return true;
+    }
+}
