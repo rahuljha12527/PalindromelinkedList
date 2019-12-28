@@ -1,0 +1,60 @@
+//head is the head of you linked list
+// Following is the node structure
+/**************
+class node{
+public:
+    int data;
+    node * next;
+    node(int data){
+        this->data=data;
+        this->next=NULL;
+    }
+};
+***************/
+node* Reverse(node* head){
+    
+    node *prev=NULL;
+    node*  current=head;
+    node  *next=NULL;
+    
+    while(current!=NULL){
+        
+        next=current->next;
+        current->next=prev;
+        prev=current;
+        current=next;
+    }
+    
+    return prev;
+}
+
+
+
+bool check_palindrome(node* head)
+{
+    node* j ,*i=head,*temp=head;
+    
+    
+    while(temp!=NULL && temp->next!=NULL){
+        i=i->next;
+        temp=temp->next->next;
+    }
+    j=i;
+    node* smallHead=Reverse(i);
+    
+    temp=head;
+    
+    while(temp!=NULL && smallHead!=NULL){
+        
+        if(temp->data==smallHead->data){
+            temp=temp->next;
+            smallHead=smallHead->next;
+        }
+        
+        else{
+            return false;
+        }
+    }
+    
+    return true;
+}
